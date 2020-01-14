@@ -1,10 +1,23 @@
 import { LitElement, html } from 'lit-element';
 
+export function generateRandomId() {
+  return (
+    Math.random()
+      .toString(36)
+      .substring(2, 15) +
+    Math.random()
+      .toString(36)
+      .substring(2, 15)
+  );
+}
+
 class NewTodo extends LitElement {
   __createTask(e) {
+    e.preventDefault();
     const task = {
       description: this.description,
       done: false,
+      id: generateRandomId(),
     };
     let create = new CustomEvent('create', {
       detail: {
@@ -32,9 +45,9 @@ class NewTodo extends LitElement {
 
   render() {
     return html`
-      <form>
+      <form @submit=${this.__createTask}>
         <input type="text" @input=${this.__changeDescription} .value=${this.description} />
-        <button type="button" @click=${this.__createTask}>New</button>
+        <button>New</button>
       </form>
     `;
   }
