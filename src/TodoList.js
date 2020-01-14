@@ -65,14 +65,13 @@ export class TodoList extends LitElement {
 
   __markAsDone(id) {
     console.log(`task to remove is ${id}`);
-    let task = this.tasks.find(task => task.id === id);
+    const task = this.tasks.find(task => task.id === id);
     task.done = !task.done;
     console.log(this.tasks);
+    this.requestUpdate();
   }
 
   __filterFn(item) {
-    this.requestUpdate();
-
     if (this.filter === FILTER.DONE) {
       return item.done;
     }
@@ -83,7 +82,7 @@ export class TodoList extends LitElement {
   }
 
   __changeFilter(e) {
-    const value = e.target.value;
+    const { value } = e.target;
     this.filter = value;
   }
 

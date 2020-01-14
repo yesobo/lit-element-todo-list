@@ -19,7 +19,7 @@ class NewTodo extends LitElement {
       done: false,
       id: generateRandomId(),
     };
-    let create = new CustomEvent('create', {
+    const create = new CustomEvent('create', {
       detail: {
         task,
       },

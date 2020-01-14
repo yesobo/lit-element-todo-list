@@ -10,6 +10,7 @@ class TodoItem extends LitElement {
   __markAsDone() {
     const doneEvent = new CustomEvent('done');
     this.dispatchEvent(doneEvent);
+    this.requestUpdate();
   }
 
   render() {
@@ -19,8 +20,8 @@ class TodoItem extends LitElement {
         <input
           name="${this.item.id}_status"
           type="checkbox"
-          ?checked=${this.item.done}
           @change=${this.__markAsDone}
+          .checked=${this.item.done}
         />
       </div>
     `;
